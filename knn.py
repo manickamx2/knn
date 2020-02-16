@@ -1,6 +1,6 @@
 # Manickam Manickam
 # knn.py - k-nearest-neighbor algorithm implementation
-# 8.7.2018
+# usage: python3 knn.py data-set.csv [H, E] k-value training-percentage seed-integer
 
 import sys
 import math
@@ -44,6 +44,7 @@ def partitionData(data_set, training_percentage):
 
 ##### MAKE PREDICTION BASED ON K-MOST SIMILAR INSTANCES FROM TRAINING SET IN COMPARISON TO TEST INSTANCE
 def distanceFunction(distance_func, test_instance, training_set, k):
+
     smallest_distances = [] #list of k instances from training set w/ smallest distance. has length of k.
     if distance_func == "H": #Hamming Distance, nominal data.
         test_instance_attributes = test_instance.getAttributes() #the test instance's set of attributes.
@@ -54,6 +55,7 @@ def distanceFunction(distance_func, test_instance, training_set, k):
                 if test_instance_attributes[i] != training_instance_attributes[i]: #when attributes are not equivalent...
                     distance += 1 #increase the distance by 1.
             smallest_distances.append((distance, training_instance))
+
         #smallest_distances[0][0] contains the distance values we want to sort by.
         smallest_distances = sorted(smallest_distances, key = lambda x: x[0]) #sort by distance.
         smallest_distances = smallest_distances[0:k] #shorten list to length of k.
